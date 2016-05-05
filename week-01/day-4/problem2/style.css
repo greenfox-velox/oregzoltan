@@ -1,0 +1,17 @@
+.green {
+  background-color: green;
+  width: 250px;
+  height: 235px;
+  padding: 20px;
+  margin-bottom: 10px;
+}
+.first {
+  background-color: yellow;
+  font-size: 30px;
+  border: black solid 4px;
+  color: blue;
+  width: 200px;
+  height: 30px;
+  padding: 20px;
+
+}
