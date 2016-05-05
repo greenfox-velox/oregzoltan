@@ -1,0 +1,10 @@
+.first {
+  background-color: yellow;
+  font-size: 30px;
+  margin: 10px;
+  border: black solid 4px;
+  color: red;
+  width: 200px;
+  height: 30px;
+  padding: 20px;
+}
