@@ -1,0 +1,16 @@
+article {
+  font-size: 18px;
+  width: 200px;
+  padding: 45px;
+  border: 2px solid black;
+  margin-bottom: 20px;
+}
+.duck1 {
+  background: url(duck.png) no-repeat left center;
+}
+.duck2 {
+  background: url(duck.png) no-repeat center center;
+}
+.duck3 {
+  background: url(duck.png) no-repeat right bottom;
+}
