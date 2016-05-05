@@ -1,0 +1,22 @@
+.green {
+  background-color: green;
+  width: 250px;
+  height: 235px;
+  padding: 20px;
+  margin-bottom: 10px;
+}
+.box {
+  font-size: 30px;
+  border: black solid 4px;
+  width: 200px;
+  height: 30px;
+  padding: 20px;
+}
+.first {
+  background-color: yellow;
+  color: blue;
+}
+.second {
+  background-color: cyan;
+  color: red;
+}
