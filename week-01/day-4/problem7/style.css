@@ -1,0 +1,10 @@
+article {
+  font-size: 18px;
+  width: 300px;
+  padding: 20px;
+  border: 2px solid black;
+  border-top: 0;
+}
+.closing {
+  border-bottom: 0;
+}
