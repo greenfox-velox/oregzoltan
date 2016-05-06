@@ -12,11 +12,11 @@
   height: 30px;
   padding: 20px;
 }
-.first {
+.fruit {
   background-color: yellow;
   color: blue;
 }
-.second {
+.veg {
   background-color: cyan;
   color: red;
 }
