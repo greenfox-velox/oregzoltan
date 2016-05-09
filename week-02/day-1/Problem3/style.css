@@ -1,0 +1,58 @@
+* {
+  border: 0;
+  margin: 0;
+}
+
+body {
+  margin-top: 3px;
+  margin-left: 3px;
+}
+
+.in-a-row {
+  width: 100%;
+  justify-content: space-between;
+  display: flex;
+}
+
+header {
+  background: #00FFFF;
+  width: 100%;
+  height: 100px;
+}
+
+.yellow {
+  background: #FEA500;
+  min-width: 100px;
+  height: 500px;
+}
+
+.red {
+  background: #FE0000;
+  width: 100%;
+  margin: 0 20px;
+  height: 500px;
+  position: relative;
+  min-width: 150px;
+}
+
+.purple {
+  background: #81007F;
+  min-width: 100px;
+  height: 500px;
+}
+
+footer {
+  background: #0000FE;
+  width: 100%;
+  height: 100px;
+}
+
+.aside-01 {
+  background: black;
+  width: 50px;
+  height: 50px;
+  float: right;
+  position: absolute;
+  right: 50px;
+  bottom: 50px;
+}
