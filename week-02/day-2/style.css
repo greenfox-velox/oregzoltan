@@ -1,0 +1,22 @@
+html {
+  box-sizing: border-box;
+}
+
+form {
+  width: 620px;
+  height: 880px;
+  background-color: #DCD6CD;
+  margin: 0 auto;
+  padding: 60px 100px;
+}
+
+h3 {
+  color: white;
+  background-color: #938C97;
+  width: 300px;
+  height: 40px;
+
+}
+h2 {
+  color: #4A4261
+}
