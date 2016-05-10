@@ -12,7 +12,11 @@ header {
   color: red;
 }
 
-.hi {
+main h3 h4 {
+  font-weight: bold;
+}
+
+.welcome-msg {
   margin-left: 22%;
   padding-top: 200px;
   font-size: 35px;
