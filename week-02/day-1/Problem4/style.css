@@ -33,8 +33,11 @@ body {
   float: right;
 }
 
-section {
+.bbot {
   border-bottom: black solid 2px;
+}
+
+section {
   margin-top: 20px;
   margin-bottom: 20px;
   padding-bottom: 20px;
@@ -43,12 +46,10 @@ section {
 .wow {
   color: red;
   padding: 5px 10px 20px 20px;
-  border-bottom: black solid 2px;
 }
 
 .somethinghappened {
   padding: 20px 10px 20px 20px;
-  border-bottom: black solid 2px;
 }
 
 .button-ok {
