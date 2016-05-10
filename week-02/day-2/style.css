@@ -1,6 +1,6 @@
-html {
+body {
   box-sizing: border-box;
-
+  font-family: Helvetica;
 }
 
 div {
@@ -8,6 +8,7 @@ div {
   margin-bottom: 10px;
   font-weight: bold;
 }
+
 form {
   width: 620px;
   height: 880px;
@@ -16,7 +17,6 @@ form {
   padding: 60px 100px;
   font-size: 15px;
   color: #4A4261;
-
 }
 
 h3 {
@@ -30,8 +30,8 @@ h3 {
 }
 textarea {
   height: 15em;
-
 }
+
 .data {
   display:flex;
   flex-direction: row;
@@ -41,27 +41,16 @@ textarea {
   display:flex;
   flex-direction: row;
 }
-.personal {
 
-}
 .cancel {
   float: right;
+  background: #4A4261;
 }
 
 .button {
   display: inline-block;
 }
 
-.contact.div {
-  margin-bottom: 60px;
-
-}
-
-}
 h2 {
   color: #4A4261
-}
-
-.grey {
-  color: grey;
 }
