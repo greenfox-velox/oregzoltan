@@ -1,13 +1,22 @@
 html {
   box-sizing: border-box;
+
 }
 
+div {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
 form {
   width: 620px;
   height: 880px;
   background-color: #DCD6CD;
   margin: 0 auto;
   padding: 60px 100px;
+  font-size: 15px;
+  color: #4A4261;
+
 }
 
 h3 {
@@ -15,8 +24,44 @@ h3 {
   background-color: #938C97;
   width: 300px;
   height: 40px;
+  border-radius: 3px;
+  padding: 10px 0px 0px 20px ;
+  margin: 0 3px 0 5px;
+}
+textarea {
+  height: 15em;
+
+}
+.data {
+  display:flex;
+  flex-direction: row;
+}
+
+.flexi {
+  display:flex;
+  flex-direction: row;
+}
+.personal {
+
+}
+.cancel {
+  float: right;
+}
+
+.button {
+  display: inline-block;
+}
+
+.contact.div {
+  margin-bottom: 60px;
+
+}
 
 }
 h2 {
   color: #4A4261
+}
+
+.grey {
+  color: grey;
 }
