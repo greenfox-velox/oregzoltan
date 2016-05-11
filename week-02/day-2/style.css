@@ -32,6 +32,12 @@ textarea {
   height: 15em;
 }
 
+#name-input, #tel-input, #email-input, #facebook-input, #twitter-input {
+  width: 300px;
+  height: 37px;
+  border-radius: 3%;
+}
+
 .data {
   display:flex;
   flex-direction: row;
