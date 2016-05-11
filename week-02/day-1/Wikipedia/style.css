@@ -1,9 +1,13 @@
+* {
+  text-decoration: none;
+}
 body {
   display: flex;
   margin: 0;
   font-family: sans-serif;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 22px;
+  font-weight: normal;
 
 }
 
@@ -20,17 +24,47 @@ header {
 }
 
 main {
-  background: #F6F6F6;
-  height: 500px;
+  background: #B0B2B5;
+  height: auto;
   margin: 0px 25px;
 }
 
 h2 {
-  border-bottom: 1px solid #A7D7F9;
+  border-bottom: 1px solid #AAAAAA;
   font-family: Georgia, Times, serif;
   font-size: 29px;
   line-height: 35px;
 
+}
+
+.picture-box {
+  float: right;
+  width: 270px;
+  height: 520px;
+  color: 249px;
+  border: 1px solid #AAAAAA;
+  text-align: center;
+}
+
+.content-menu-box {
+  width: 121px;
+  height: 264px;
+  color: 249px;
+  border: 1px solid #AAAAAA;
+  text-align: left;
+}
+
+.content-menu-box ul {
+  list-style-type: none;
+  padding-left: 10px;
+
+
+}
+
+section::after {
+  content: "";
+  display:block;
+  clear: both;
 }
 footer {
   background: #F6F6F6;
@@ -51,10 +85,7 @@ aside {
 
 }
 
-aside a {
-  text-decoration: none;
 
-}
 aside div {
   margin-left: 27px;
   margin-right: 27px;
