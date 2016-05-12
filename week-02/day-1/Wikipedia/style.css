@@ -30,7 +30,6 @@ body {
 header {
   background: #F6F6F6;
   height: 79px;
-  border-bottom: 1px solid #A7D7F9;
 
 }
 
@@ -67,7 +66,14 @@ header {
 }
 main {
   height: auto;
-  margin: 0px 25px;
+  margin: 0px;
+  padding-left: 25px;
+  padding-right: 25px;
+  border-top: 1px solid #A7D7F9;
+  border-left: 1px solid #A7D7F9;
+  border-bottom: 1px solid #A7D7F9;
+
+
 }
 
 h2 {
@@ -92,12 +98,27 @@ h5 {
   font-weight: normal;
   color: #252525;
 }
+
+.leftpad {
+  padding-left: 40px;
+
+}
+.leftpad20 {
+  padding-left: 20px;
+}
+.leftpad60 {
+  padding-left: 60px;
+}
 .titles {
   border-bottom: 1px solid #AAAAAA;
   font-family: Georgia, Times, serif;
   font-weight: normal;
   font-size: 21px;
   line-height: 27px;
+}
+.mrg {
+  overflow: hidden;
+  margin-right: 30px;
 }
 .apollo-awards-titles {
   font-family: sans-serif;
@@ -106,26 +127,30 @@ h5 {
   line-height: 21px;
 
 }
+
+
 .picture-box1 {
   font-family: sans-serif;
   font-weight: normal;
   font-size: 12px;
   line-height: 18px;
-  background-color: #F9F9F9;
   float: right;
   width: 270px;
   height: 520px;
   color: 249px;
   border: 1px solid #AAAAAA;
   text-align: center;
+  margin-left: 15px;
+  background-color: #F9F9F9;
+
 }
 
-.picture-box1 p {
+.pic-box p {
   margin-top: 0px;
   margin-bottom: -15px;
+
 }
-dl div {
-}
+
 dt {
   margin-left: -10px;
   margin-right: 60px;
@@ -155,6 +180,10 @@ dd {
   line-height: 17px;
   color: #252525;
   font-weight: normal;
+  background-color: #F9F9F9;
+  margin-left: 15px;
+
+
 
 }
 .picture-box3 {
@@ -170,6 +199,10 @@ dd {
   line-height: 17px;
   color: #252525;
   font-weight: normal;
+  background-color: #F9F9F9;
+  margin-left: 15px;
+
+
 }
 .picture-box4 {
   float: right;
@@ -184,6 +217,10 @@ dd {
   line-height: 17px;
   color: #252525;
   font-weight: normal;
+  background-color: #F9F9F9;
+  margin-left: 15px;
+
+
 }
 .content-menu-box {
   background-color: #F9F9F9;
@@ -218,9 +255,10 @@ dd {
 footer {
   background: #F6F6F6;
   height: 151px;
-  border-top: 1px solid #A7D7F9;
   font-size: 11px;
   line-height: 16px;
+  padding: 12px;
+
 }
 
 .footer-flex {
@@ -233,7 +271,6 @@ aside {
   background: #F6F6F6;
   width: 176px;
   flex: 1 0 auto;
-  border-right: 1px solid #A7D7F9;
   font-family: sans-serif;
   font-size: 12px;
   line-height: 8px;
@@ -248,8 +285,12 @@ aside ul {
 
 aside div {
   margin-left: 27px;
-  margin-right: 27px;
+  margin-right: 20px;
   border-bottom: 1px solid #D8D8D8;
+
+}
+aside div:nth-child(7) {
+  border-bottom: none;
 
 }
 .logo {
