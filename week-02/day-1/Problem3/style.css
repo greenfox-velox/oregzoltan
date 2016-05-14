@@ -1,11 +1,5 @@
-* {
-  border: 0;
-  margin: 0;
-}
-
 body {
-  margin-top: 3px;
-  margin-left: 3px;
+  margin: 0;
 }
 
 .in-a-row {
