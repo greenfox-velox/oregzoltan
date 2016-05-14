@@ -9,9 +9,14 @@ div {
   font-weight: bold;
 }
 
+.personal, .contact {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
 form {
   width: 620px;
-  height: 880px;
+  height: 950px;
   background-color: #DCD6CD;
   margin: 0 auto;
   padding: 60px 100px;
@@ -22,17 +27,16 @@ form {
 h3 {
   color: white;
   background-color: #938C97;
-  width: 300px;
+  width: 285px;
   height: 40px;
   border-radius: 3px;
   padding: 10px 0px 0px 20px ;
-  margin: 0 3px 0 5px;
 }
 textarea {
   height: 15em;
 }
 
-#name-input, #tel-input, #email-input, #facebook-input, #twitter-input {
+#housetypes, #name-input, #tel-input, #email-input, #facebook-input, #twitter-input {
   width: 300px;
   height: 37px;
   border-radius: 3%;
@@ -53,6 +57,36 @@ textarea {
   background: #4A4261;
 }
 
+#sf {
+  width: 220px;
+  height: 35px;
+  background-color: white;
+  text-align: center;
+  color: #554E6B;
+  border-radius: 7px;
+  font-size: 14px;
+
+}
+#save-button {
+  width: 220px;
+  height: 45px;
+  background-color: #4A4261;
+  text-align: center;
+  color: white;
+  border-radius: 7px;
+  font-size: 20px;
+}
+
+#cancel-button {
+  width: 160px;
+  height: 45px;
+  background-color: white;
+  text-align: center;
+  color: #554E6B;
+  border-radius: 7px;
+  font-size: 14px;
+
+}
 .button {
   display: inline-block;
 }
