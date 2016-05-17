@@ -12,3 +12,18 @@ a = 0
 while a != ae:
     print (text)
     a += 1
+
+af = [4, 5, 6, 7]
+# print all the elements of af
+a = 0
+while a != len(af):
+    print (af[a])
+    a += 1
+
+ag = [3, 4, 5, 6, 7]
+# please double all the elements of the list
+a = 0
+while a != len(ag):
+    ag[a] *= 2
+    a += 1
+print (ag)
