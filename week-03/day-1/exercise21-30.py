@@ -70,3 +70,35 @@ elif len(aa) > 2:
 else:
     out = -1
 print (out)
+
+ab = 123
+credits = 100
+is_bonus = False
+# if credits are at least 50,
+# and is_bonus is False decrement ab by 2
+# if credits are smaller than 50,
+# and is_bonus is False decrement ab by 1
+# if is_bonus is True ab should remain the same
+if credits >= 50 and is_bonus == False:
+    ab -= 2
+if credits < 50 and is_bonus == False:
+    ab -= 1
+print (ab)
+
+ac = 8
+time = 120
+out = ''
+# if ac is dividable by 4
+# and time is not more than 200
+# set out to 'check'
+# if time is more than 200
+# set out to 'Time out'
+# otherwise set out to 'Run Forest Run!'
+if ac % 4 == 0:
+    if time <= 200:
+        out = "check"
+    elif time > 200:
+        out = "Time out"
+else:
+    out = "Run Forest Run"
+print (out)             
