@@ -11,7 +11,7 @@ n = 'The result is: '
 a = 2
 b = 3
 # concat the product of a and b to the n string
-n = n + str(a) + str(b)
+n = n + str(a * b) 
 print (n)
 
 o = "pneumonoultramicroscopicsilicovolcanoconiosis"
