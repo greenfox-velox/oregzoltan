@@ -94,11 +94,10 @@ out = ''
 # if time is more than 200
 # set out to 'Time out'
 # otherwise set out to 'Run Forest Run!'
-if ac % 4 == 0:
-    if time <= 200:
-        out = "check"
-    elif time > 200:
-        out = "Time out"
+if ac % 4 == 0 and time <= 200:
+    out = "check"
+elif time > 200:
+    out = "Time out"
 else:
     out = "Run Forest Run"
-print (out)             
+print (out)
