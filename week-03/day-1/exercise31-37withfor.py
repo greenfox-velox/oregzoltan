@@ -11,8 +11,8 @@ for a in range(ae):
 
 af = [4, 5, 6, 7]
 # print all the elements of af
-for a in range(len(af)):
-    print (af[a])
+for a in af:
+    print (a)
 
 ag = [3, 4, 5, 6, 7]
 # please double all the elements of the list
@@ -29,8 +29,8 @@ print (ah)
 ah = [3, 4, 5, 6, 7]
 # print the sum of all numbers in ah
 total = 0
-for a in range(len(ah)):
-    total += ah[a]
+for a in ah:
+    total += ah
 print(total)
 
 # print the even numbers till 20
