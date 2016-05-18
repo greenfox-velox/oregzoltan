@@ -61,14 +61,13 @@ out = 0
 # if the aa list contains two element set the out to 2
 # if the aa list contains more than 2 set the out to 10
 # if the aa contains no elements it should set to -1
-if len(aa) == 1:
-    out = 1
-elif len(aa) == 2:
-    out = 2
-elif len(aa) > 2:
+lenaa = len(aa)
+if lenaa == 0:
+    out = -1
+elif lenaa > 2:
     out = 10
 else:
-    out = -1
+    out = lenaa
 print (out)
 
 ab = 123
@@ -79,11 +78,33 @@ is_bonus = False
 # if credits are smaller than 50,
 # and is_bonus is False decrement ab by 1
 # if is_bonus is True ab should remain the same
+#1
 if credits >= 50 and is_bonus == False:
     ab -= 2
 if credits < 50 and is_bonus == False:
     ab -= 1
 print (ab)
+#2
+ab = 123
+credits = 100
+is_bonus = False
+if not is_bonus:
+    if credits > 50:
+        ab -= 2
+    else:
+        ab -= 1
+print(ab)
+#3
+ab = 123
+credits = 100
+is_bonus = False
+if is_bonus:
+    pass
+elif credits > 50:
+    ab -= 2
+else:
+    ab -= 1
+print(ab)
 
 ac = 8
 time = 120
@@ -94,10 +115,10 @@ out = ''
 # if time is more than 200
 # set out to 'Time out'
 # otherwise set out to 'Run Forest Run!'
-if ac % 4 == 0 and time <= 200:
-    out = "check"
-elif time > 200:
+if time > 200:
     out = "Time out"
+elif ac % 4 == 0:
+    out = "check"
 else:
     out = "Run Forest Run"
 print (out)
