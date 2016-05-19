@@ -12,18 +12,21 @@ class Pirate():
 
     def drink_rum(self):
         self.i += 1
+
+    def hows_goin_mate(self):
         if self.i >=5:
-            return self.hows_goin_mate()
+            return "Arrrr!"
         else:
             return "Nothin'"
 
-    def hows_goin_mate(self):
-        return "Arrrr!"
-
 captain = Pirate()
-print(captain.drink_rum())
-print(captain.drink_rum())
-print(captain.drink_rum())
-print(captain.drink_rum())
-print(captain.drink_rum())
-print(captain.drink_rum())
+captain.drink_rum()
+captain.drink_rum()
+print(captain.hows_goin_mate())
+captain.drink_rum()
+captain.drink_rum()
+print(captain.hows_goin_mate())
+captain.drink_rum()
+print(captain.hows_goin_mate())
+captain.drink_rum()
+print(captain.hows_goin_mate())
