@@ -5,7 +5,7 @@ def return_min(arg):
     min = arg[0]
     for each in arg:
         if min > each:
-           min = each
+            min = each
     return min
 
 print(return_min(numbers))
