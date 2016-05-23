@@ -8,12 +8,8 @@ def decrypt(file_name):
     while counter != len(text):
         if text[counter] == '\n':
             text2 += text[counter]
-            counter += 1
-        else:
-            if counter % 2 == 0:
-                counter += 1
-            else:
-                text2 += text[counter]
-                counter += 1
+        elif counter % 2 == 0:
+            text2 += text[counter]
+        counter += 1
     f.close()
     return text2
