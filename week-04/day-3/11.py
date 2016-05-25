@@ -17,10 +17,9 @@ def draw_square(size, color):
     draw_box = canvas.create_rectangle(x, x, x+size, x+size, fill=color)
 
 for i in range(300, 1, -1):
-    r1 = random.randrange(10, 99)
-    r2 = random.randrange(10, 99)
-    r3 = random.randrange(10, 99)
-    r = '#' + str(r1) + str(r2) +str(r3)
+    r1 = random.randrange(150, 255)
+    r2 = random.randrange(16, 255)
+    r3 = random.randrange(16, 150)
+    r = '#' + str(hex(r1)[2:]) + str(hex(r2)[2:]) + str(hex(r3)[2:])
     draw_square(i*10, r)
-
 root.mainloop()
