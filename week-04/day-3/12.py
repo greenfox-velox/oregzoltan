@@ -11,8 +11,8 @@ canvas.pack()
 def draw_square(size):
     x = 2
     y = 2
-    for i in range(1, 15):
-        for j in range(1, 15):
+    for i in range(1, 9):
+        for j in range(1, 9):
             if (i+j) % 2 == 0:
                 color = 'black'
             else:
@@ -22,6 +22,6 @@ def draw_square(size):
         x = 2
         y += size
 
-draw_square(20)
+draw_square(300 // 8)
 
 root.mainloop()
