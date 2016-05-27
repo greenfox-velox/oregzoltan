@@ -2,7 +2,6 @@ from tkinter import *
 
 root = Tk()
 w = 620
-h = 450
 canvas = Canvas(root, bg='#D9D9D9', width=w, height=w)
 canvas.pack()
 def draw(x, y, s):
