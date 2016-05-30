@@ -23,7 +23,7 @@ def median(pool):
 
 # Returns true if the param is a vovel
 def is_vovel(char):
-    if char.lower() in 'aeiou':
+    if char.lower() in 'aáeéiíoóöőuúüű':
         return True
 
 # Create a method that translates hungarian into the teve language

@@ -36,7 +36,7 @@ class TestExtend(unittest.TestCase):
         self.assertTrue(extend.is_vovel('a'))
 
     def test_is_vovel_u(self):
-        self.assertTrue(extend.is_vovel('u'))
+        self.assertTrue(extend.is_vovel('Ő'))
 
     def test_is_vovel_u_upper(self):
         self.assertTrue(extend.is_vovel('U'))
