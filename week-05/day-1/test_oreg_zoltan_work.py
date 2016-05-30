@@ -15,13 +15,13 @@ class AnagrammAndCountLettersTest(unittest.TestCase):
 
 
     def test_count_letters_asd(self):
-        self.assertEqual(count_letters('asdssdd a'), ({'a':2, 's':3, 'd':3, ' ':1}))
+        self.assertEqual(count_letters('asdssdd a'), ({'a':2, 's':3, 'd':3}))
 
     def test_count_letters_stars(self):
-        self.assertEqual(count_letters('**01 *01 *a'), ({'*':4, '0':2, '1':2, 'a':1, ' ':2}))
+        self.assertEqual(count_letters('**01 *01 *a'), ({'a':1}))
 
     def test_count_letters_stars_vv(self):
-        self.assertEqual(count_letters(' VVqqovv '), ({'v':4, 'q':2, 'o':1, ' ':2}))
+        self.assertEqual(count_letters(' VVqqovv '), ({'v':4, 'q':2, 'o':1}))
 
 if __name__ == '__main__':
     unittest.main()
