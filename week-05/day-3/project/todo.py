@@ -40,13 +40,8 @@ class TodoApp():
             return '[ ] '
 
     def list_task(self):
-        try:
-            f = open(self.name)
-            text = csv.reader(f, delimiter=';')
-        except:
-            self.create_file_if_missing()
-            f = open(self.name)
-            text = csv.reader(f, delimiter=';')
+        self.try_to_open_file()
+        text = csv.reader(self.f, delimiter=';')
         line_number = 1
         text2 = ''
         for i in text:
@@ -55,7 +50,7 @@ class TodoApp():
         if len(text2) <= 0:
             return('No todos for today!')
         return(text2)
-        f.close()
+        self.f.close()
 
     def add_new_task(self):
         if len(self.arg) == 2:
@@ -73,28 +68,52 @@ class TodoApp():
         if len(self.arg) == 2:
             print('Unable to remove: No index is provided')
         else:
+            self.try_to_open_file()
             try:
-                f = open(self.name)
-            except:
-                self.create_file_if_missing()
-                f = open(self.name)
-            try:
-                text = f.readlines()
+                text = self.f.readlines()
                 del text[int(self.arg[2])-1]
-                f.close()
-                f = open(self.name, 'w')
+                self.f.close()
+                self.f = open(self.name, 'w')
                 for i in text:
-                    f.write(i)
-                f.close()
+                    self.f.write(i)
+                self.f.close()
             except IndexError:
                 print('Unable to remove: Index is out of bound')
             except ValueError:
                 print('Unable to remove: Index is not a number')
 
     def create_file_if_missing(self):
-        f = open(self.name, 'w')
+        self.f = open(self.name, 'w')
+
+    def try_to_open_file(self):
+        try:
+            self.f = open(self.name)
+        except:
+            self.create_file_if_missing()
+            self.f = open(self.name)
 
     def complete_task(self):
-        pass
+        if len(self.arg) == 2:
+            print('Unable to check: No index is provided')
+        else:
+            self.try_to_open_file()
+            try:
+                text = csv.reader(self.f, delimiter=';')
+                text2 = []
+                for i in text:
+                    text2.append(i)
+                if text2[int(self.arg[2])-1][0] == 'True':
+                    print('It is already checked')
+                else:
+                    text2[int(self.arg[2])-1][0] = 'True'
+                self.f.close()
+                self.f = open(self.name, 'w')
+                for i in text2:
+                    self.f.write(i[0] + ';' + i[1] + '\n')
+                self.f.close()
+            except IndexError:
+                print('Unable to check: Index is out of bound')
+            except ValueError:
+                print('Unable to check: Index is not a number')
 
 main()
