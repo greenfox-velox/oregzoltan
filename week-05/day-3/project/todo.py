@@ -1,15 +1,16 @@
 import sys
+import csv
 
 def main():
-    zoli = TodoApp()
+    todo = TodoApp()
     if len(sys.argv) > 1:
-        zoli.menu(sys.argv)
+        todo.menu(sys.argv)
     else:
-        print(zoli.usage())
+        print(todo.usage())
 
 class TodoApp():
     def __init__(self):
-        self.name = 'todo.txt'
+        self.name = 'todo.csv'
 
     def menu(self, arg):
         self.arg = arg
@@ -32,22 +33,28 @@ class TodoApp():
         text = 'Python Todo application\n=======================\n\nCommand line arguments:\n -l   Lists all the tasks\n -a   Adds a new task\n -r   Removes an task\n -c   Completes an task\n'
         return text
 
+    def checked(self, x):
+        if x == 'True':
+            return '[x] '
+        else:
+            return '[ ] '
+
     def list_task(self):
         try:
             f = open(self.name)
+            text = csv.reader(f, delimiter=';')
         except:
             self.create_file_if_missing()
             f = open(self.name)
-        text = f.readlines()
+            text = csv.reader(f, delimiter=';')
         line_number = 1
         text2 = ''
-        if len(text) <= 0:
+        for i in text:
+            text2 = text2 + str(line_number) + ' - ' + self.checked(i[0]) + i[1] + '\n'
+            line_number += 1
+        if len(text2) <= 0:
             return('No todos for today!')
-        else:
-            for i in text:
-                text2 = text2 + str(line_number) + ' - ' + i
-                line_number += 1
-            return(text2)
+        return(text2)
         f.close()
 
     def add_new_task(self):
@@ -59,7 +66,7 @@ class TodoApp():
             except:
                 self.create_file_if_missing()
                 f = open(self.name)
-            f.write(self.arg[2]+'\n')
+            f.write('False;'+self.arg[2]+'\n')
             f.close()
 
     def remove_task(self):
@@ -71,7 +78,7 @@ class TodoApp():
             except:
                 self.create_file_if_missing()
                 f = open(self.name)
-            try:    
+            try:
                 text = f.readlines()
                 del text[int(self.arg[2])-1]
                 f.close()
