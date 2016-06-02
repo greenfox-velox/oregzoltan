@@ -19,9 +19,15 @@ class TodoApp():
         elif self.arg[1] == '-a':
             self.add_new_task()
         elif self.arg[1] == '-r':
-            self.remove_task()
+            if self.arg[2] == '0':
+                print('Unable to remove: Index is out of bound')
+            else:
+                self.remove_task()
         elif self.arg[1] == '-c':
-            self.complete_task()
+            if self.arg[2] == '0':
+                print('Unable to check: Index is out of bound')
+            else:
+                self.complete_task()
         else:
             self.argument_error_handling()
 
@@ -43,13 +49,13 @@ class TodoApp():
         self.try_to_open_file()
         text = csv.reader(self.f, delimiter=';')
         line_number = 1
-        text2 = ''
+        text_read = ''
         for i in text:
-            text2 = text2 + str(line_number) + ' - ' + self.checked(i[0]) + i[1] + '\n'
+            text_read = text_read + str(line_number) + ' - ' + self.checked(i[0]) + i[1] + '\n'
             line_number += 1
-        if len(text2) <= 0:
+        if len(text_read) <= 0:
             return('No todos for today!')
-        return(text2)
+        return(text_read)
         self.f.close()
 
     def add_new_task(self):
@@ -99,16 +105,16 @@ class TodoApp():
             self.try_to_open_file()
             try:
                 text = csv.reader(self.f, delimiter=';')
-                text2 = []
+                text_to_write = []
                 for i in text:
-                    text2.append(i)
-                if text2[int(self.arg[2])-1][0] == 'True':
+                    text_to_write.append(i)
+                if text_to_write[int(self.arg[2])-1][0] == 'True':
                     print('It is already checked')
                 else:
-                    text2[int(self.arg[2])-1][0] = 'True'
+                    text_to_write[int(self.arg[2])-1][0] = 'True'
                 self.f.close()
                 self.f = open(self.name, 'w')
-                for i in text2:
+                for i in text_to_write:
                     self.f.write(i[0] + ';' + i[1] + '\n')
                 self.f.close()
             except IndexError:
