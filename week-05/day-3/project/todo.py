@@ -60,8 +60,8 @@ class TodoApp():
             line_number += 1
         if len(text_read) <= 0:
             return('No todos for today!')
-        return(text_read)
         self.f.close()
+        return(text_read)
 
     def add_new_task(self):
         if len(self.arg) == 2:
@@ -89,7 +89,6 @@ class TodoApp():
             print('Unable to remove: Index is out of bound')
         except ValueError:
             print('Unable to check: Index is not a number')
-
 
     def create_file_if_missing(self):
         self.f = open(self.name, 'w')
