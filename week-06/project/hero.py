@@ -1,39 +1,35 @@
 from tkinter import *
-from game_screen import GameScreen
+import random
 
 class Hero(object):
-    def __init__(self, canvas, hero_down_image, hero_left_image, hero_right_image, hero_up_image):
+    def __init__(self, canvas):
         self.canvas = canvas
-        self.hero_down_image = hero_down_image
-        self.hero_left_image = hero_left_image
-        self.hero_right_image = hero_right_image
-        self.hero_up_image = hero_up_image
+        self.hero_down_image = PhotoImage(file='hero-down.png')
+        self.hero_left_image = PhotoImage(file='hero-left.png')
+        self.hero_right_image = PhotoImage(file='hero-right.png')
+        self.hero_up_image = PhotoImage(file='hero-up.png')
         self.x = 1
         self.y = 1
+        self.level_of_hero = 1
+        self.max_hp = 20 + 3 * random.randint(1, 6)
+        self.hp = self.max_hp
+        self.dp = 2 * random.randint(1, 6)
+        self.sp = 5 + random.randint(1, 6)
+        self.draw_hero(self.hero_down_image)
 
-    def position_hero(self, char, map):
-        if char == 'c':
-            self.draw_hero(self.hero_down_image)
-        if char == '<Down>':
-            for each in map:
-                if each.x == self.x and each.y == self.y+1 and each.type != 'wall' and self.y+1 <= 10:
-                    self.y += 1
-                    break
-            self.draw_hero(self.hero_down_image)
-
-        if char == '<Up>':
-            if self.y-1 >= 1:
-                self.y += -1
-            self.draw_hero(self.hero_up_image)
-        if char == '<Left>':
-            if self.x-1 >= 1:
-                self.x += -1
-            self.draw_hero(self.hero_left_image)
-        if char == '<Right>':
-            if self.x+1 <= 10:
-                self.x += 1
-            self.draw_hero(self.hero_right_image)
-
+    def stat(self):
+        stat = 'Hero (Level 1) HP: ' + str(self.hp) + '/' + str(self.max_hp) + ' | DP: ' + str(self.dp) + ' | SP: ' + str(self.sp)
+        return stat
 
     def draw_hero(self, hero_direction):
-        self.canvas.create_image(self.x*72-65, self.y*72-65, image = hero_direction, anchor = NW)
+        self.canvas.create_image(self.x*60-53, self.y*60-53, image = hero_direction, anchor = NW)
+        self.canvas.create_text(310, 620, text=self.stat())
+
+    def move_down_hero(self):
+        self.y += 1
+    def move_up_hero(self):
+        self.y += -1
+    def move_left_hero(self):
+        self.x += -1
+    def move_right_hero(self):
+        self.x += 1
