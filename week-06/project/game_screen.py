@@ -1,7 +1,9 @@
 from tkinter import *
 import random
+from monsters import *
+from hero import Hero
 
-class floor(object):
+class Floor(object):
     def __init__(self, x, y, canvas):
         self.x = x
         self.y = y
@@ -13,7 +15,7 @@ class floor(object):
     def draw(self):
         self.canvas.create_image(self.x*60-53, self.y*60-53, image = self.floor_image, anchor = NW)
 
-class wall(object):
+class Wall(object):
     def __init__(self, x, y, canvas):
         self.x = x
         self.y = y
@@ -24,83 +26,88 @@ class wall(object):
     def draw(self):
         self.canvas.create_image(self.x*60-53, self.y*60-53, image = self.wall_image, anchor = NW)
 
-class monster(object):
-    def __init__(self, x, y, canvas):
-        self.canvas = canvas
-        self.skeleton_image = PhotoImage(file='skeleton.png')
-        self.key = False
-        self.boss = False
-        self.x = x
-        self.y = y
-        self.max_hp = 2 * random.randint(1, 6)
-        self.hp = self.max_hp
-        self.dp = 0.5 * random.randint(1, 6)
-        self.sp = random.randint(1, 6)
-        self.stat = 'Monster HP: ' + str(self.hp) + '/' + str(self.max_hp) + ' | DP: ' + str(self.dp) + ' | SP: ' + str(self.sp)
+class Tile(object):
+    def __init__(self, canvas):
+        self.map = []
+        self.create_tiles(canvas)
 
-    def draw(self):
-        self.canvas.create_image(self.x*60-53, self.y*60-53, image = self.skeleton_image, anchor = NW)
-
-
-class boss(object):
-    def __init__(self, x, y, canvas):
-        self.canvas = canvas
-        self.boss_image = PhotoImage(file='boss.png')
-        self.key = False
-        self.boss = True
-        self.x = x
-        self.y = y
-        self.max_hp = 2 * random.randint(1, 6) + random.randint(1, 6)
-        self.hp = self.max_hp
-        self.dp = 0.5 * random.randint(1, 6) + random.randint(1, 6)/2
-        self.sp = random.randint(1, 6)
-        self.stat = 'Monster HP: ' + str(self.hp) + '/' + str(self.max_hp) + ' | DP: ' + str(self.dp) + ' | SP: ' + str(self.sp)
-
-    def draw(self):
-        self.canvas.create_image(self.x*60-53, self.y*60-53, image = self.boss_image, anchor = NW)
+    def create_tiles(self, canvas):
+        for x in range(1, 11):
+            for y in range(1, 11):
+                if x == 1 and y == 1:
+                    self.map.append(Floor(1, 1, canvas))
+                else:
+                    ran = random.randint(1, 10)
+                    if ran < 5 and x > 1 and x < 10 and y > 1 and y < 10:
+                        self.map.append(Wall(x, y, canvas))
+                    else:
+                        self.map.append(Floor(x, y, canvas))
 
 class GameScreen(object):
     def __init__(self, canvas):
         self.canvas = canvas
-        self.create_tiles()
+        self.tile = Tile(canvas)
         self.create_monsters()
-
-    def create_tiles(self):
-        self.map = []
-        for x in range(1, 11):
-            for y in range(1, 11):
-                if x == 1 and y == 1:
-                    self.map.append(floor(1, 1, self.canvas))
-                else:
-                    ran = random.randint(1, 10)
-                    if ran < 5 and x > 1 and x < 10 and y > 1 and y < 10:
-                        self.map.append(wall(x, y, self.canvas))
-                    else:
-                        self.map.append(floor(x, y, self.canvas))
+        self.draw_map()
+        self.hero = Hero(canvas)
 
     def create_monsters(self):
         self.monsters = []
-        self.monsters.append(boss(10, 10, self.canvas))
-        self.map[0].enemy = True
-        for i in range(3):
+        for i in range(4):
             j = True
             while j == True:
                 ran_x = random.randint(2, 10)
                 ran_y = random.randint(2, 10)
-                for each in self.map:
+                for each in self.tile.map:
                     if each.x == ran_x and each.y == ran_y and each.type == 'floor' and each.enemy == False:
-                        self.monsters.append(monster(ran_x, ran_y, self.canvas))
-                        each.enemy = True
+                        if i == 0:
+                            self.monsters.append(Boss(ran_x, ran_y, self.canvas))
+                        elif i == 1:
+                            self.monsters.append(Skeleton(ran_x, ran_y, self.canvas))
+                            self.monsters[1].key = True
+                        else:
+                            self.monsters.append(Skeleton(ran_x, ran_y, self.canvas))
+                            each.enemy = True
                         j = False
+
+    def position_hero_with_check(self, char):
+        self.draw_map()
+        if char == '<Down>':
+            for each in self.tile.map:
+                if each.x == self.hero.x and each.y == self.hero.y+1 and each.type != 'wall' and self.hero.y+1 <= 10:
+                    self.hero.move_down_hero()
+                    break
+            self.hero.draw_hero(self.hero.hero_down_image)
+
+        if char == '<Up>':
+            for each in self.tile.map:
+                if each.x == self.hero.x and each.y == self.hero.y-1 and each.type != 'wall' and self.hero.y-1 >= 1:
+                    self.hero.move_up_hero()
+            self.hero.draw_hero(self.hero.hero_up_image)
+
+        if char == '<Left>':
+            for each in self.tile.map:
+                if each.x == self.hero.x-1 and each.y == self.hero.y and each.type != 'wall' and self.hero.x-1 >= 1:
+                    self.hero.move_left_hero()
+            self.hero.draw_hero(self.hero.hero_left_image)
+
+        if char == '<Right>':
+            for each in self.tile.map:
+                if each.x == self.hero.x+1 and each.y == self.hero.y and each.type != 'wall' and self.hero.x+1 <= 10:
+                    self.hero.move_right_hero()
+                    break
+            self.hero.draw_hero(self.hero.hero_right_image)
+
+        self.hero_vs_monster()
 
     def draw_map(self):
         self.canvas.delete('all')
-        for field in self.map:
+        for field in self.tile.map:
             field.draw()
         for each in self.monsters:
             each.draw()
 
-    def hero_vs_monster( hero_x, hero_y):
+    def hero_vs_monster(self):
         for each in self.monsters:
-            if each.x == hero_x and each.y == hero_y:
-                self.canvas.create_text(300, 640, text=each.stat)
+            if each.x == self.hero.x and each.y == self.hero.y:
+                self.canvas.create_text(300, 640, text=each.stat())
