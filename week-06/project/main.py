@@ -1,29 +1,21 @@
 from game_screen import GameScreen
-from hero import Hero
 from tkinter import *
 
 def main():
     def key_down(event):
-        game.draw_map()
-        hero.position_hero('<Down>', game.map)
+        game.position_hero_with_check('<Down>')
     def key_up(event):
-        game.draw_map()
-        hero.position_hero('<Up>', game.map)
+        game.position_hero_with_check('<Up>')
     def key_right(event):
-        game.draw_map()
-        hero.position_hero('<Right>', game.map)
+        game.position_hero_with_check('<Right>')
     def key_left(event):
-        game.draw_map()
-        hero.position_hero('<Left>', game.map)
+        game.position_hero_with_check('<Left>')
 
     root = Tk()
-    canvas = Canvas(root, width=620, height=660)
+    canvas = Canvas(root, width=615, height=660)
     canvas.pack()
     game = GameScreen(canvas)
-    hero = Hero(canvas)
-    game.draw_map()
 
-    hero.position_hero('create_pos', game.map)
     root.bind_all('<Down>', key_down)
     root.bind_all('<Up>', key_up)
     root.bind_all('<Right>', key_right)
