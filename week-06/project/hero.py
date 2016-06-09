@@ -25,11 +25,6 @@ class Hero(object):
         self.canvas.create_image(self.x*60-53, self.y*60-53, image = hero_direction, anchor = NW)
         self.canvas.create_text(310, 620, text=self.stat())
 
-    def move_down_hero(self):
-        self.y += 1
-    def move_up_hero(self):
-        self.y += -1
-    def move_left_hero(self):
-        self.x += -1
-    def move_right_hero(self):
-        self.x += 1
+    def move_hero(self, x, y):
+        self.x += x
+        self.y += y
