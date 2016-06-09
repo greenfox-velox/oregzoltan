@@ -70,31 +70,31 @@ class GameScreen(object):
                             each.enemy = True
                         j = False
 
-    def position_hero_with_check(self, char):
+    def position_hero_with_check(self, event):
         self.draw_map()
-        if char == '<Down>':
+        if event.keysym == 'Down':
             for each in self.tile.map:
                 if each.x == self.hero.x and each.y == self.hero.y+1 and each.type != 'wall' and self.hero.y+1 <= 10:
-                    self.hero.move_down_hero()
+                    self.hero.move_hero(0, 1)
                     break
             self.hero.draw_hero(self.hero.hero_down_image)
 
-        if char == '<Up>':
+        if event.keysym == 'Up':
             for each in self.tile.map:
                 if each.x == self.hero.x and each.y == self.hero.y-1 and each.type != 'wall' and self.hero.y-1 >= 1:
-                    self.hero.move_up_hero()
+                    self.hero.move_hero(0, -1)
             self.hero.draw_hero(self.hero.hero_up_image)
 
-        if char == '<Left>':
+        if event.keysym == 'Left':
             for each in self.tile.map:
                 if each.x == self.hero.x-1 and each.y == self.hero.y and each.type != 'wall' and self.hero.x-1 >= 1:
-                    self.hero.move_left_hero()
+                    self.hero.move_hero(-1, 0)
             self.hero.draw_hero(self.hero.hero_left_image)
 
-        if char == '<Right>':
+        if event.keysym == 'Right':
             for each in self.tile.map:
                 if each.x == self.hero.x+1 and each.y == self.hero.y and each.type != 'wall' and self.hero.x+1 <= 10:
-                    self.hero.move_right_hero()
+                    self.hero.move_hero(1, 0)
                     break
             self.hero.draw_hero(self.hero.hero_right_image)
 
