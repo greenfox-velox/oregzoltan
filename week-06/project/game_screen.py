@@ -47,11 +47,12 @@ class Board(object):
 class GameScreen(object):
     def __init__(self, canvas):
         self.level = 1
+        self.step_counter = 0
         self.canvas = canvas
         self.board = Board(canvas)
         self.create_monsters()
-        self.draw_map()
         self.hero = Hero(canvas, self.level)
+        self.draw_map()
 
     def create_monsters(self):
         self.monsters = []
@@ -60,8 +61,8 @@ class GameScreen(object):
             while j == True:
                 ran_x = random.randint(2, 10)
                 ran_y = random.randint(2, 10)
-                for each in self.board.map:
-                    if each.x == ran_x and each.y == ran_y and each.type == 'floor' and each.enemy == False:
+                for tile in self.board.map:
+                    if tile.x == ran_x and tile.y == ran_y and tile.type == 'floor' and tile.enemy == False:
                         if i == 0:
                             self.monsters.append(Boss(ran_x, ran_y, self.canvas, self.level))
                         elif i == 1:
@@ -69,32 +70,31 @@ class GameScreen(object):
                             self.monsters[1].key = True
                         else:
                             self.monsters.append(Skeleton(ran_x, ran_y, self.canvas, self.level))
-                        each.enemy = True
+                        tile.enemy = True
                         j = False
 
     def position_hero_with_check(self, event):
-        self.draw_map()
         if event.keysym == 'Down':
             for tile in self.board.map:
                 if tile.x == self.hero.x and tile.y == self.hero.y+1 and tile.type != 'wall' and self.hero.y+1 <= 10:
                     self.hero.move_hero(0, 1)
                     break
             self.hero.set_hero_direction_image('down')
-            self.hero.draw_hero()
+            self.step_counter += 1
 
         if event.keysym == 'Up':
             for tile in self.board.map:
                 if tile.x == self.hero.x and tile.y == self.hero.y-1 and tile.type != 'wall' and self.hero.y-1 >= 1:
                     self.hero.move_hero(0, -1)
             self.hero.set_hero_direction_image('up')
-            self.hero.draw_hero()
+            self.step_counter += 1
 
         if event.keysym == 'Left':
             for tile in self.board.map:
                 if tile.x == self.hero.x-1 and tile.y == self.hero.y and tile.type != 'wall' and self.hero.x-1 >= 1:
                     self.hero.move_hero(-1, 0)
             self.hero.set_hero_direction_image('left')
-            self.hero.draw_hero()
+            self.step_counter += 1
 
         if event.keysym == 'Right':
             for tile in self.board.map:
@@ -102,7 +102,7 @@ class GameScreen(object):
                     self.hero.move_hero(1, 0)
                     break
             self.hero.set_hero_direction_image('right')
-            self.hero.draw_hero()
+            self.step_counter += 1
 
         if event.keysym == 'space':
             counter = -1
@@ -116,16 +116,16 @@ class GameScreen(object):
 
         if event.keysym == 'n':
             self.next_area()
-
-        self.hero.draw_hero()
-        self.position_checker(event)
+        self.position_checker_to_move_monsters()
+        self.draw_map()
 
     def draw_map(self):
         self.canvas.delete('all')
         for field in self.board.map:
             field.draw()
         for monster in self.monsters:
-            monster.draw()
+            monster.draw(self.hero.x, self.hero.y)
+        self.hero.draw_hero()
 
     def battle(self, monster, counter):
         sv = self.hero.sp + random.randint(1, 6)*2
@@ -147,7 +147,6 @@ class GameScreen(object):
         if self.hero.hp <= 0:
             self.hero_dies()
         self.draw_map()
-        self.hero.draw_hero()
 
     def next_area(self):
         self.level += 1
@@ -165,7 +164,20 @@ class GameScreen(object):
         print('game over')
         sys.exit()
 
-    def position_checker(self, event):
+    def position_checker_to_move_monsters(self):
         for monster in self.monsters:
-            if monster.x == self.hero.x and monster.y == self.hero.y:
-                self.canvas.create_text(300, 640, text=monster.stat())
+            new_position_list = []
+            if self.step_counter % 2 == 0:
+                for tile in self.board.map:
+                    if tile.x == monster.x and tile.y == monster.y-1 and tile.type != 'wall':
+                        new_position_list.append([tile.x, tile.y])
+                    if tile.x == monster.x and tile.y == monster.y+1 and tile.type != 'wall':
+                        new_position_list.append([tile.x, tile.y])
+                    if tile.x == monster.x-1 and tile.y == monster.y and tile.type != 'wall':
+                        new_position_list.append([tile.x, tile.y])
+                    if tile.x == monster.x+1 and tile.y == monster.y and tile.type != 'wall':
+                        new_position_list.append([tile.x, tile.y])
+                if len(new_position_list) > 0:
+                    ran = random.randint(0, len(new_position_list)-1)
+                    monster.x = new_position_list[ran][0]
+                    monster.y = new_position_list[ran][1]
