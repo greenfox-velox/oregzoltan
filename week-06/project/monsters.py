@@ -24,8 +24,10 @@ class Skeleton(Monster):
             stat += ' I have the key'
         return stat
 
-    def draw(self):
+    def draw(self, hero_x, hero_y):
         self.canvas.create_image(self.x*60-53, self.y*60-53, image = self.skeleton_image, anchor = NW)
+        if self.x == hero_x and self.y == hero_y:
+            self.canvas.create_text(300, 640, text=self.stat())
 
 class Boss(Monster):
     def __init__(self, x, y, canvas, level):
@@ -41,5 +43,7 @@ class Boss(Monster):
         stat = 'Boss HP: ' + str(self.hp) + '/' + str(self.max_hp) + ' | DP: ' + str(self.dp) + ' | SP: ' + str(self.sp)
         return stat
 
-    def draw(self):
+    def draw(self, hero_x, hero_y):
         self.canvas.create_image(self.x*60-53, self.y*60-53, image = self.boss_image, anchor = NW)
+        if self.x == hero_x and self.y == hero_y:
+            self.canvas.create_text(300, 640, text=self.stat())
