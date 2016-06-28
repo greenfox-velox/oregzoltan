@@ -13,11 +13,11 @@ function Stack() {
     return this.stack.length;
   },
   this.push = function(item) {
-    this.stack.push(item);
+    this.stack[this.stack.length] = item;
   },
   this.pop = function() {
     var last = this.stack[this.stack.length-1];
-    this.stack.pop();
+    this.stack.length--;
     return last;
   }
 }
@@ -29,3 +29,4 @@ console.log(zoli.size());
 zoli.push('cigi');
 console.log(zoli.pop());
 console.log(zoli.stack);
+console.log(zoli.size());
