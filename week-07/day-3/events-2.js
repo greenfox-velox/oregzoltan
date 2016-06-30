@@ -1,20 +1,3 @@
-// <!DOCTYPE html>
-// <html lang="en">
-// <head>
-//   <meta charset="UTF-8">
-//   <title>Workshop: EventListeners</title>
-// </head>
-// <body>
-//   <ul>
-//     <li>apple</li>
-//     <li>balloon</li>
-//     <li>cat</li>
-//     <li>dolphin</li>
-//   </ul>
-//   <button>How many items are in the list?</button>
-//   <p class="result">dunno :(</p>
-//
-//   <script>
 'use strict';
 
     // On the click of the button,
