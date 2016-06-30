@@ -1,3 +1,7 @@
+body {
+  background-color: #690A0A;
+}
+
 .container {
   margin: auto;
   background: black;
@@ -8,9 +12,7 @@
   justify-content: center;
   display: flex;
   margin: auto;
-
 }
-
 
 .left {
   align-items: stretch;
@@ -26,6 +28,7 @@
   width: 600px;
   height: 500px;
 }
+
 .img_main {
   margin: 0;
   width: auto;
@@ -49,6 +52,7 @@
   width: auto;
   height: 100px;
 }
+
 .right {
   background: black;
   width: 100px;
@@ -72,6 +76,7 @@
 .big_right, .small_right {
   background-image: url(rightarrow.png);
 }
+
 h1, h2 {
   color: white;
   text-align: center;
