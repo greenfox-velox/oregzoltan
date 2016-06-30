@@ -1,7 +1,6 @@
 .container {
-  /*width: 622px;
-  height: 753px;*/
   margin: auto;
+  background: black;
 }
 
 .row {
@@ -14,13 +13,13 @@
 
 
 .left {
-  background: #FEA500;
+  align-items: stretch;
+  background: black;
   width: 100px;
   height: 500px;
 }
 
 .middle {
-  background: #FE0000;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -29,7 +28,6 @@
 }
 .img_main {
   margin: 0;
-  background: #00FFFF;
   width: auto;
   height: 400px;
 }
@@ -48,12 +46,26 @@
 .img_row {
   display: flex;
   justify-content: center;
-  background: #0000FE;
   width: auto;
   height: 100px;
 }
 .right {
-  background: #81007F;
+  background: black;
   width: 100px;
   height: 500px;
+}
+
+.arrow_button {
+  width: 50px;
+  height: 50px;
+  margin-top: 185px;
+}
+
+.big_left, .small_left {
+  margin-left: 50px;
+}
+
+h1, h2 {
+  color: white;
+  text-align: center;
 }

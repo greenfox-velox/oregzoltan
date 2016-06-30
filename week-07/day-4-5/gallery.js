@@ -11,15 +11,46 @@ var pictureList = [
   'imgs/6111.jpg',
   'imgs/6112.jpg',
 ];
+var actual = 0;
 var img_main = document.querySelector('.img_big');
-img_main.setAttribute('src', pictureList[0]);
+img_main.setAttribute('src', pictureList[actual]);
 
 var img_row = document.querySelectorAll('.img_small');
 for (var i = 0; i < 4; i++) {
   img_row[i].setAttribute('src', pictureList[i]);
+}
+
+var img_title = document.querySelector('h2');
+img_title.textContent = img_main.getAttribute('src');
+
+var buttonBL = document.querySelector('.big_left');
+var buttonSL = document.querySelector('.small_left');
+var buttonBR = document.querySelector('.big_right');
+var buttonSR = document.querySelector('.small_right');
+
+function bigToRight() {
+  if (actual < pictureList.length-1) {
+    actual++;
+    img_main.setAttribute('src', pictureList[actual]);
+    img_title.textContent = img_main.getAttribute('src');
+  }
+}
+function bigToLeft() {
+  if (actual > 0) {
+    actual--;
+    img_main.setAttribute('src', pictureList[actual]);
+    img_title.textContent = img_main.getAttribute('src');
+  }
+}
+
+
+function smallToLeft() {
 
 }
-// var pictureList = document.querySelectorAll('.pictureList');
-// for (var i = 0; i < pictureList.length; i++) {
-//   pictureList[i].src = pictureListUrls[i];
-// }
+function smallToRight() {
+
+}
+buttonBL.addEventListener('click', bigToLeft);
+buttonSL.addEventListener('click', smallToLeft);
+buttonBR.addEventListener('click', bigToRight);
+buttonSR.addEventListener('click', smallToRight);
