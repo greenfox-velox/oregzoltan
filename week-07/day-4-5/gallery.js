@@ -21,16 +21,30 @@ var actualSmall = 0;
 var limit = 0;
 
 var img_main = document.querySelector('.img_big');
-img_main.setAttribute('src', pictureList[actual]);
+setMainImg();
 
 var img_row = document.querySelectorAll('.img_small');
-limit = actualSmall+4;
-for (var i = actualSmall; i < limit; i++) {
-  img_row[i].setAttribute('src', pictureList[i]);
+setSmallImgs();
+
+function setImageTitle() {
+  return img_title.textContent = img_main.getAttribute('src').split('/')[1];
+}
+
+function setMainImg() {
+  img_main.setAttribute('src', pictureList[actual]);
+}
+
+function setSmallImgs() {
+  limit = actualSmall+4;
+  counter = 0;
+  for (var i = actualSmall; i < limit; i++) {
+    img_row[counter].setAttribute('src', pictureList[i]);
+    counter++;
+  }
 }
 
 var img_title = document.querySelector('h2');
-img_title.textContent = img_main.getAttribute('src');
+setImageTitle();
 
 var buttonBL = document.querySelector('.big_left');
 var buttonSL = document.querySelector('.small_left');
@@ -40,45 +54,49 @@ var buttonSR = document.querySelector('.small_right');
 function bigToRight() {
   if (actual < pictureList.length-1) {
     actual++;
-    img_main.setAttribute('src', pictureList[actual]);
-    img_title.textContent = img_main.getAttribute('src');
+    setMainImg();
+    setImageTitle();
   }
 }
 
 function bigToLeft() {
   if (actual > 0) {
     actual--;
-    img_main.setAttribute('src', pictureList[actual]);
-    img_title.textContent = img_main.getAttribute('src');
+    setMainImg();
+    setImageTitle();
   }
 }
 
 function smallToRight() {
-  if (actualSmall+4 < pictureList.length-1) {
+  if (actualSmall+4 < pictureList.length) {
     actualSmall++;
-    limit = actualSmall+4;
-    counter = 0;
-    for (var i = actualSmall; i < limit; i++) {
-      img_row[counter].setAttribute('src', pictureList[i]);
-      counter++;
-    }
+    setSmallImgs();
   }
 }
 
 function smallToLeft() {
   if (actualSmall > 0) {
     actualSmall--;
-    limit = actualSmall+4;
-    counter = 0;
-    for (var i = actualSmall; i < limit; i++) {
-      img_row[counter].setAttribute('src', pictureList[i]);
-      counter++;
-    }
+    setSmallImgs();
   }
 }
 
+function clickSmallImg(i) {
+  return function() {
+    img_main.setAttribute('src', img_row[i].getAttribute('src'));
+    setImageTitle();
+    pictureList.forEach(function(e, j) {
+      if (e === img_row[i].getAttribute('src')) {
+        actual = j;
+      }
+    })
+  };
+}
 
 buttonBL.addEventListener('click', bigToLeft);
 buttonSL.addEventListener('click', smallToLeft);
 buttonBR.addEventListener('click', bigToRight);
 buttonSR.addEventListener('click', smallToRight);
+for (var i = 0; i < 4; i++) {
+  img_row[i].addEventListener('click', clickSmallImg(i));
+}
