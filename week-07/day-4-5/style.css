@@ -58,13 +58,20 @@
 .arrow_button {
   width: 50px;
   height: 50px;
+  border: 0;
+  background-color: rgba(100, 100, 100, 1);
+  background-size: 100% 100%;
   margin-top: 185px;
 }
 
 .big_left, .small_left {
   margin-left: 50px;
+  background-image: url(leftarrow.png);
 }
 
+.big_right, .small_right {
+  background-image: url(rightarrow.png);
+}
 h1, h2 {
   color: white;
   text-align: center;
