@@ -3,7 +3,7 @@ body {
 }
 
 .container {
-  margin: auto;
+  margin: 10px;
   background: black;
 }
 
@@ -36,22 +36,23 @@ body {
 }
 
 .img_big {
-  width: 600px;
   height: 400px;
+  width: 598px;
+  border: 1px solid #FF0000;
 }
 
 .img_small {
-  margin: 0;
+  border: 1px solid #FF0000;
+  margin-top: 1px;
   width: 145px;
-  height: 100px;
+  height: 98px;
 }
 
 .img_row {
   display: flex;
   justify-content: space-between;
-  width: auto;
+  width: 600px;
   height: 100px;
-  background-color: #FF0000;
 }
 
 .right {
