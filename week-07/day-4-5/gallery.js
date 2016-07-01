@@ -1,27 +1,28 @@
 'use strict';
 
 var pictureList = [
-  // 'imgs/01.png',
-  // 'imgs/02.png',
-  // 'imgs/03.png',
-  // 'imgs/04.png',
-  // 'imgs/05.png',
-  // 'imgs/06.png',
-  // 'imgs/07.png',
-  // 'imgs/08.png',
+  'imgs/01.png',
   'imgs/6095.jpg',
+  'imgs/02.png',
   'imgs/6096.jpg',
+  'imgs/03.png',
   'imgs/6098.jpg',
+  'imgs/04.png',
   'imgs/6099.jpg',
+  'imgs/05.png',
   'imgs/6100.jpg',
+  'imgs/06.png',
   'imgs/6101.jpg',
+  'imgs/07.png',
   'imgs/6109.jpg',
+  'imgs/08.png',
   'imgs/6111.jpg',
+  'imgs/09.png',
   'imgs/6112.jpg',
   'imgs/6115.jpg',
   'imgs/6116.jpg',
   'imgs/6117.jpg',
-  // 'imgs/09.jpg',
+  'imgs/10.jpg',
 ];
 
 var counter = 0;
@@ -44,7 +45,7 @@ function setMainImg() {
 }
 
 function setSmallImgs() {
-  limit = actualSmall+4;
+  limit = actualSmall + 4;
   counter = 0;
   for (var i = actualSmall; i < limit; i++) {
     img_row[counter].setAttribute('src', pictureList[i]);
@@ -61,7 +62,7 @@ var buttonBR = document.querySelector('.big_right');
 var buttonSR = document.querySelector('.small_right');
 
 function bigToRight() {
-  if (actual < pictureList.length-1) {
+  if (actual < pictureList.length - 1) {
     actual++;
     setMainImg();
     setImageTitle();
@@ -77,7 +78,7 @@ function bigToLeft() {
 }
 
 function smallToRight() {
-  if (actualSmall+4 < pictureList.length) {
+  if (actualSmall + 4 < pictureList.length) {
     actualSmall++;
     setSmallImgs();
   }

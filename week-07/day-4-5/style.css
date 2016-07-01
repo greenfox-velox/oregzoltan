@@ -9,8 +9,11 @@ body {
 
 .oz {
   position: fixed;
-  right: 18px;
-  top: 11px;
+  right: 23px;
+  top: 16px;
+  border: 1px solid #FF0000;
+  width: 150px;
+  height: 25px;
 }
 
 .row {
