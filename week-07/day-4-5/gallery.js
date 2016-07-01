@@ -1,6 +1,14 @@
 'use strict';
 
 var pictureList = [
+  // 'imgs/01.png',
+  // 'imgs/02.png',
+  // 'imgs/03.png',
+  // 'imgs/04.png',
+  // 'imgs/05.png',
+  // 'imgs/06.png',
+  // 'imgs/07.png',
+  // 'imgs/08.png',
   'imgs/6095.jpg',
   'imgs/6096.jpg',
   'imgs/6098.jpg',
@@ -13,6 +21,7 @@ var pictureList = [
   'imgs/6115.jpg',
   'imgs/6116.jpg',
   'imgs/6117.jpg',
+  // 'imgs/09.jpg',
 ];
 
 var counter = 0;
