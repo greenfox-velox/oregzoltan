@@ -1,1 +1,1 @@
-[Link for cloned syllabus repo](https://github.com/oregzoltan/velox-syllabus)
+[Link to website](http://oregzoltan.github.io)
