@@ -64,7 +64,6 @@ function Car(type, color, balance) {
   idCounter++;
 }
 
-
 Car.prototype.enter = function(enterDate) {
   this.enterDate = enterDate;
 };
@@ -73,7 +72,7 @@ Car.prototype.getEnterDate = function() {
   return this.enterDate;
 };
 
-Car.prototype.Leave = function(price) {
+Car.prototype.leave = function(price) {
   this.balance -= price;
 };
 
@@ -90,7 +89,7 @@ function CarPark(income, startTime) {
 
 CarPark.prototype.carEnter = function(cars) {
   this.cars.push(cars);
-  cars.enter(new Date().getTime());
+  cars.enter(this.startTime);
 };
 
 var j;
@@ -98,9 +97,8 @@ CarPark.prototype.carLeave = function(id) {
   var _this = this;
   this.cars.forEach(function(e, i) {
     if (e.id === id) {
-      var currentTime = new Date().getTime();
-      var charge = _this.fee * (currentTime - e.enterDate);
-      e.balance -= charge;
+      var charge = _this.fee * (_this.startTime - e.getEnterDate()) / 3600000;
+      e.leave(charge);
       _this.income += charge;
       j = i;
     }
@@ -109,13 +107,12 @@ CarPark.prototype.carLeave = function(id) {
 };
 
 CarPark.prototype.elapseTime = function(hours) {
-
+  this.startTime += 3600000 * hours;
 };
 
 CarPark.prototype.getStats = function() {
   return "Cars: " + this.cars.length + ", Time: " + this.startTime + ", Income: " + this.income
 };
-
 
 var car1 = new Car('volvo', 'red', 500);
 var car2 = new Car('mazda', 'blue', 600);
@@ -125,9 +122,10 @@ park.carEnter(car1);
 park.carEnter(car3);
 park.carEnter(car2);
 console.log(park);
+park.elapseTime(5);
+console.log(park);
 park.carLeave(1);
+park.elapseTime(5);
 park.carEnter(car2);
 console.log(park);
 console.log(park.getStats());
-
-// module.exports.Car = Car;
