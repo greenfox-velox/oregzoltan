@@ -41,6 +41,5 @@ setInterval(function () {
   }
 }, 1000);
 
-
 creCan.addEventListener('click', createCandies);
 buyLol.addEventListener('click', buyLollipop);
