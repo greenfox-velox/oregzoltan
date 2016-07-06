@@ -1,0 +1,3 @@
+create a wfunction that takes a filename
+reads the wcontent of the file
+hello

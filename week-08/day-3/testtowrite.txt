@@ -1,0 +1,1 @@
+createcreate aa wfunctionwfunction thatthat takestakes aa filenamefilename readsreads thethe wcontentwcontent ofof thethe filefile hellohello 
