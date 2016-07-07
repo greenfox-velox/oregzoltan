@@ -32,7 +32,7 @@ function buyLollipop() {
 }
 
 setInterval(function () {
-  if (lollipops >= 10){
+  if (lollipops >= 100){
     candies += Math.floor(lollipops / 10);
     setCandies();
   }
