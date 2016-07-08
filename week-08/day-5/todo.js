@@ -9,13 +9,17 @@ function getTodos() {
     var data = JSON.parse(xhr.responseText);
     data.forEach(function (e, i) {
       var newTodo = document.createElement('div');
-      newTodo.classList.add("todo-item");
+      newTodo.classList.add('todo-item');
       newTodo.innerHTML = '<div class="task">' + data[i].text + '</div><button id = "d' + data[i].id + '" class="delButton"></button><button id = "chk' + data[i].id + '" class="chkButton"></button>';
       newTodo.setAttribute('id', 'di'+data[i].id);
       divContainer.appendChild(newTodo);
       document.getElementById('d'+data[i].id).addEventListener('click', delTodo);
       document.getElementById('chk'+data[i].id).addEventListener('click', chkTodo);
+      if (e.completed) {
+        document.getElementById('chk'+data[i].id).classList.add('checked');
+      } 
     })
+
   };
   xhr.open('GET', 'https://mysterious-dusk-8248.herokuapp.com/todos');
   xhr.send();
@@ -32,6 +36,7 @@ function addNewTodo() {
     divContainer.appendChild(newTodo);
     document.getElementById('d'+data.id).addEventListener('click', delTodo);
     document.getElementById('chk'+data.id).addEventListener('click', chkTodo);
+    document.getElementById('chk'+data.id).classList.add('unchecked');
 
   };
   var newTodoToAdd = {
@@ -59,10 +64,12 @@ function chkTodo(event) {
     text: document.querySelector('#di'+id + ' div').textContent,
     completed: true
   };
-  console.log(toSend);
   xhr.open('PUT', 'https://mysterious-dusk-8248.herokuapp.com/todos/' + id, true);
-  xhr.setRequestHeader('Accept', 'application/json');
-  xhr.send(toSend);
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.send(JSON.stringify(toSend));
+  console.log(document.getElementById('chk'+id));
+  document.getElementById('chk'+id).classList.add('checked');
+
 }
 
 getTodos();
