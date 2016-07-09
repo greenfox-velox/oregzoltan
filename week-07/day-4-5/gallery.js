@@ -2,27 +2,15 @@
 
 var pictureList = [
   'imgs/01.png',
-  'imgs/6095.jpg',
   'imgs/02.png',
-  'imgs/6096.jpg',
   'imgs/03.png',
-  'imgs/6098.jpg',
   'imgs/04.png',
-  'imgs/6099.jpg',
-  'imgs/05.png',
-  'imgs/6100.jpg',
   'imgs/06.png',
-  'imgs/6101.jpg',
   'imgs/07.png',
-  'imgs/6109.jpg',
   'imgs/08.png',
-  'imgs/6111.jpg',
   'imgs/09.png',
-  'imgs/6112.jpg',
-  'imgs/6115.jpg',
-  'imgs/6116.jpg',
-  'imgs/6117.jpg',
-  'imgs/10.jpg',
+  'imgs/10.png',
+  'imgs/11.jpg',
 ];
 
 var counter = 0;
