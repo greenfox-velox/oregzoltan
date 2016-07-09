@@ -5,6 +5,7 @@ body {
 .container {
   margin: 10px;
   background: black;
+  padding-bottom: 120px;
 }
 
 .oz {
