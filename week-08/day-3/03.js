@@ -13,7 +13,7 @@
 
 var fs = require('fs');
 
-function dobleIt(fimeNameRd, fileNameWr, cb) {
+function doubleIt(fimeNameRd, fileNameWr, cb) {
   fs.readFile(fimeNameRd, function(err, content) {
     if (err) {
       return cb(err);
@@ -33,6 +33,6 @@ function dobleIt(fimeNameRd, fileNameWr, cb) {
   });
 }
 
-dobleIt('test.txt', 'testtowrite.txt', function(err) {
+doubleIt('test.txt', 'testtowrite.txt', function(err) {
   console.log(err);
 });
