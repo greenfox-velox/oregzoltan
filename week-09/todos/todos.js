@@ -5,7 +5,7 @@ var app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-var data = [
+var todoList = [
   {
     'completed': false,
     'id': 1,
@@ -24,25 +24,25 @@ var data = [
 ];
 
 app.get('/todos', function(req, res) {
-  res.send(data);
+  res.send(todoList);
 });
 
 app.get('/todos/:id', function(req, res) {
-  res.send(data.filter(function (e) {
+  res.send(todoList.filter(function (e) {
     if (e.id === +req.params.id) {
       return e;
     }
   })[0]);
 });
 
-var currentId = data.length;
+var currentId = todoList.length;
 function createNewTodo(text) {
   var newTodo = {
     'completed': false,
     'id': ++currentId,
     'text': text
   }
-  data.push(newTodo);
+  todoList.push(newTodo);
   return newTodo;
 }
 
@@ -51,7 +51,7 @@ app.post('/todos', function(req, res) {
 });
 
 app.put('/todos/:id', function(req, res) {
-  res.send(data.filter(function (e) {
+  res.send(todoList.filter(function (e) {
     if (e.id === +req.params.id) {
       e.completed = true;
       e.text = req.body.text;
@@ -60,17 +60,21 @@ app.put('/todos/:id', function(req, res) {
   })[0]);
 });
 
-app.delete('/todos/:id', function(req, res, next) {
-  res.send(data.filter(function (e) {
+app.delete('/todos/:id', function(req, res) {
+  res.send(todoList.filter(function (e) {
     if (e.id === +req.params.id) {
       e.destroyed = true;
-      data.splice(data.indexOf(e), 1);
+      todoList.splice(todoList.indexOf(e), 1);
       return e;
     }
   })[0]);
-  res.sendStatus(404);
 });
 
+// app.get('*', function(req, res) {
+//     res.sendfile('./index.html');
+// });
+
 // app.use(function(err, req, res, next) {
-// })
+// res.sendStatus(404);
+// });
 app.listen(3000);
