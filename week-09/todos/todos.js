@@ -28,11 +28,12 @@ app.get('/todos', function(req, res) {
 });
 
 app.get('/todos/:id', function(req, res) {
-  res.send(todoList.filter(function (e) {
+  var item = todoList.filter(function (e) {
     if (e.id === +req.params.id) {
       return e;
     }
-  })[0]);
+  })[0];
+errorHandling(res, item);
 });
 
 var currentId = todoList.length;
@@ -51,30 +52,36 @@ app.post('/todos', function(req, res) {
 });
 
 app.put('/todos/:id', function(req, res) {
-  res.send(todoList.filter(function (e) {
+  var item = todoList.filter(function (e) {
     if (e.id === +req.params.id) {
       e.completed = true;
       e.text = req.body.text;
       return e;
     }
-  })[0]);
+  })[0];
+errorHandling(res, item);
 });
 
 app.delete('/todos/:id', function(req, res) {
-  res.send(todoList.filter(function (e) {
+  var item = todoList.filter(function (e) {
     if (e.id === +req.params.id) {
       e.destroyed = true;
       todoList.splice(todoList.indexOf(e), 1);
       return e;
     }
-  })[0]);
+  })[0];
+errorHandling(res, item);
 });
 
+function errorHandling(res, item) {
+  if (item === undefined) {
+    res.sendStatus(404);
+  } else {
+    res.send(item);
+  }
+}
 // app.get('*', function(req, res) {
 //     res.sendfile('./index.html');
 // });
 
-// app.use(function(err, req, res, next) {
-// res.sendStatus(404);
-// });
 app.listen(3000);
