@@ -4,7 +4,7 @@ var bodyParser = require('body-parser');
 var app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
+app.use(express.static('todo'));
 var todoList = [
   {
     'completed': false,
@@ -80,8 +80,5 @@ function errorHandling(res, item) {
     res.send(item);
   }
 }
-// app.get('*', function(req, res) {
-//     res.sendfile('./index.html');
-// });
 
 app.listen(3000);
