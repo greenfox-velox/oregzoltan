@@ -5,80 +5,72 @@ var app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static('todo'));
-var mysql = require("mysql");
-
-var con = mysql.createConnection({
-  database: "todos",
-  host: "localhost",
-  user: "root",
-  password: "velox"
-});
-
-con.connect(function(err){
-  if(err){
-    console.log("Error connecting to Db");
-    return;
+var todoList = [
+  {
+    'completed': false,
+    'id': 1,
+    'text': 'Buy milk'
+  },
+  {
+    'completed': false,
+    'id': 2,
+    'text': 'Make dinner'
+  },
+  {
+    'completed': false,
+    'id': 3,
+    'text': 'Save the world'
   }
-  console.log("Connection established");
-});
+];
 
 app.get('/todos', function(req, res) {
-    con.query('SELECT * FROM todo;',function(err,rows){
-      if(err) {
-        console.log(err.toString());
-        return;
-      }
-      res.send(rows);
-    });
+  res.send(todoList);
 });
 
 app.get('/todos/:id', function(req, res) {
-  con.query('SELECT * FROM todo WHERE id =' +req.params.id, function(err,row){
-    if(err) {
-      console.log(err.toString());
-      return;
+  var item = todoList.filter(function (e) {
+    if (e.id === +req.params.id) {
+      return e;
     }
-    errorHandling(res, row[0]);
-  });
+  })[0];
+errorHandling(res, item);
 });
 
-function createNewTodo(id, text) {
+var currentId = todoList.length;
+function createNewTodo(text) {
   var newTodo = {
     'completed': false,
-    'id': id,
+    'id': ++currentId,
     'text': text
   }
+  todoList.push(newTodo);
   return newTodo;
 }
 
 app.post('/todos', function(req, res) {
-  con.query('INSERT INTO todo VALUES (0, "' + req.body.text + '", 0)', function(err,row){
-    if(err) {
-      console.log(row);
-      return;
-    }
-  res.send(createNewTodo(row.insertId, req.body.text));
-  });
+  res.send(createNewTodo(req.body.text));
 });
 
 app.put('/todos/:id', function(req, res) {
-  con.query('UPDATE todo SET text = "' + req.body.text + '", completed = 1 WHERE id = ' + req.params.id, function(err,row){
-    if(err) {
-      console.log(err.toString());
-      return;
+  var item = todoList.filter(function (e) {
+    if (e.id === +req.params.id) {
+      e.completed = true;
+      e.text = req.body.text;
+      return e;
     }
-  errorHandling(res, {id: +req.params.id, text: req.body.text, completed: true});
-  });
+  })[0];
+errorHandling(res, item);
 });
 
 app.delete('/todos/:id', function(req, res) {
-  con.query('DELETE FROM todo WHERE id = ' + req.params.id, function(err,row){
-    if(err) {
-      console.log(err.toString());
-      return;
+  var item = todoList.filter(function (e) {
+    if (e.id === +req.params.id) {
+      e.destroyed = true;
+      todoList.splice(todoList.indexOf(e), 1);
+      return e;
     }
-  errorHandling(res, {id: +req.params.id, text: req.body.text, completed: true});
-  });
+  })[0];
+errorHandling(res, item);
 });
 
 function errorHandling(res, item) {
