@@ -5,72 +5,80 @@ var app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static('todo'));
-var todoList = [
-  {
-    'completed': false,
-    'id': 1,
-    'text': 'Buy milk'
-  },
-  {
-    'completed': false,
-    'id': 2,
-    'text': 'Make dinner'
-  },
-  {
-    'completed': false,
-    'id': 3,
-    'text': 'Save the world'
+var mysql = require("mysql");
+
+var con = mysql.createConnection({
+  database: "todos",
+  host: "localhost",
+  user: "root",
+  password: "velox"
+});
+
+con.connect(function(err){
+  if(err){
+    console.log("Error connecting to Db");
+    return;
   }
-];
+  console.log("Connection established");
+});
 
 app.get('/todos', function(req, res) {
-  res.send(todoList);
+    con.query('SELECT * FROM todo;',function(err,rows){
+      if(err) {
+        console.log(err.toString());
+        return;
+      }
+      res.send(rows);
+    });
 });
 
 app.get('/todos/:id', function(req, res) {
-  var item = todoList.filter(function (e) {
-    if (e.id === +req.params.id) {
-      return e;
+  con.query('SELECT * FROM todo WHERE id =' +req.params.id, function(err,row){
+    if(err) {
+      console.log(err.toString());
+      return;
     }
-  })[0];
-errorHandling(res, item);
+    errorHandling(res, row[0]);
+  });
 });
 
-var currentId = todoList.length;
-function createNewTodo(text) {
+function createNewTodo(id, text) {
   var newTodo = {
     'completed': false,
-    'id': ++currentId,
+    'id': id,
     'text': text
   }
-  todoList.push(newTodo);
   return newTodo;
 }
 
 app.post('/todos', function(req, res) {
-  res.send(createNewTodo(req.body.text));
+  con.query('INSERT INTO todo VALUES (0, "' + req.body.text + '", 0)', function(err,row){
+    if(err) {
+      console.log(row);
+      return;
+    }
+  res.send(createNewTodo(row.insertId, req.body.text));
+  });
 });
 
 app.put('/todos/:id', function(req, res) {
-  var item = todoList.filter(function (e) {
-    if (e.id === +req.params.id) {
-      e.completed = true;
-      e.text = req.body.text;
-      return e;
+  con.query('UPDATE todo SET text = "' + req.body.text + '", completed = 1 WHERE id = ' + req.params.id, function(err,row){
+    if(err) {
+      console.log(err.toString());
+      return;
     }
-  })[0];
-errorHandling(res, item);
+  errorHandling(res, {id: +req.params.id, text: req.body.text, completed: true});
+  });
 });
 
 app.delete('/todos/:id', function(req, res) {
-  var item = todoList.filter(function (e) {
-    if (e.id === +req.params.id) {
-      e.destroyed = true;
-      todoList.splice(todoList.indexOf(e), 1);
-      return e;
+  con.query('DELETE FROM todo WHERE id = ' + req.params.id, function(err,row){
+    if(err) {
+      console.log(err.toString());
+      return;
     }
-  })[0];
-errorHandling(res, item);
+  errorHandling(res, {id: +req.params.id, text: req.body.text, completed: true});
+  });
 });
 
 function errorHandling(res, item) {
