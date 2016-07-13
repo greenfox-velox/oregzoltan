@@ -62,12 +62,12 @@ app.post('/todos', function(req, res) {
 });
 
 app.put('/todos/:id', function(req, res) {
-  con.query('UPDATE todo SET text = "' + req.body.text + '", completed = 1 WHERE id = ' + req.params.id, function(err,row){
+  con.query('UPDATE todo SET text = "' + req.body.text + '", completed = ' + req.body.completed + ' WHERE id = ' + req.params.id, function(err,row){
     if(err) {
       console.log(err.toString());
       return;
     }
-  errorHandling(res, {id: +req.params.id, text: req.body.text, completed: true});
+  errorHandling(res, {id: +req.params.id, text: req.body.text, completed: req.body.completed});
   });
 });
 
@@ -77,7 +77,7 @@ app.delete('/todos/:id', function(req, res) {
       console.log(err.toString());
       return;
     }
-  errorHandling(res, {id: +req.params.id, text: req.body.text, completed: true});
+  errorHandling(res, {id: +req.params.id, text: req.body.text, completed: req.body.completed});
   });
 });
 

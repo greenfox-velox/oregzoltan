@@ -67,13 +67,13 @@ function chkTodo(event) {
   var id = event.target.getAttribute('id').slice(3);
   var toSend = {
     text: document.querySelector('#di'+id + ' div').textContent,
-    completed: true
+    completed: !document.getElementById('chk'+id).classList.contains('checked')
   };
   xhr.open('PUT', url + '/' + id, true);
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.onload = function() {
     if (xhr.readyState === 4) {
-      document.getElementById('chk'+id).classList.add('checked');
+      document.getElementById('chk'+id).classList.toggle('checked');
     }
   }
   xhr.send(JSON.stringify(toSend));
