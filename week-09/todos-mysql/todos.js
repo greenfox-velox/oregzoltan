@@ -43,12 +43,11 @@ app.get('/todos/:id', function(req, res) {
 });
 
 function createNewTodo(id, text) {
-  var newTodo = {
+  return {
     'completed': false,
     'id': id,
     'text': text
-  }
-  return newTodo;
+  };
 }
 
 app.post('/todos', function(req, res) {
@@ -77,7 +76,7 @@ app.delete('/todos/:id', function(req, res) {
       console.log(err.toString());
       return;
     }
-  errorHandling(res, {id: +req.params.id, text: req.body.text, completed: req.body.completed});
+    errorHandling(res, {id: +req.params.id, text: req.body.text, completed: req.body.completed});
   });
 });
 
