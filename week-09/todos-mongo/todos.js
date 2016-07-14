@@ -19,7 +19,7 @@ MongoClient.connect(url, function (err, db) {
 
     // do some work here with the database.
     var collection = db.collection('todos');
-
+    collection.remove({});
     // //Create some users
     // var todo1 = {id: 1, text: 'eat', completed: false};
     // var todo2 = {id: 2, text: 'drink', completed: false};
@@ -37,34 +37,56 @@ MongoClient.connect(url, function (err, db) {
       collection.find().toArray(function (err, result) {
         if (err) {
           console.log(err);
-        } else {
-          res.send(result);
         }
+        res.send(result);
       });
     });
 
-      app.post('/todos', function(req, res) {
-        collection.insert(createNewTodo(req.body.text), function(err, result){
-          console.log("hftfthf");
+    var currentid = 0;
+    app.post('/todos', function(req, res) {
+      var newTodo = {
+        'id': ++currentid,
+        'text': req.body.text,
+        'completed': false
+      };
+      collection.insert(newTodo, function(err, result){
           if (err) {
             console.log(err);
-            return;
           }
-        console.log(result[0]);
-        res.send(result[0]);
+        res.send(newTodo);
       });
     });
-    // db.close();
-  }});
 
-var currentid = 0;
-function createNewTodo(text) {
-  return {
-    'id': ++currentid,
-    'text': text,
-    'completed': false
-  };
+  app.put('/todos/:id', function(req, res) {
+    collection.update({'id': req.params.id}, {$set:{'completed': true}}, function(err, result){
+      if(err) {
+        console.log(err.toString());
+        return;
+      }
+    errorHandling(res, {id: +req.params.id, text: req.body.text, completed: req.body.completed});
+    });
+  });
+}});
+
+  app.delete('/todos/:id', function(req, res) {
+    collection.remove({}, function(err,row){
+      if(err) {
+        console.log(err.toString());
+        return;
+      }
+      errorHandling(res, {id: +req.params.id, text: req.body.text, completed: req.body.completed});
+    });
+  });
+
+function errorHandling(res, item) {
+  if (item === undefined) {
+    res.sendStatus(404);
+  } else {
+    res.send(item);
+  }
 }
+app.listen(3000);
+
 //
 // app.get('/todos/:id', function(req, res) {
 //   con.query('SELECT * FROM todo WHERE id =' +req.params.id, function(err,row){
@@ -97,12 +119,3 @@ function createNewTodo(text) {
 //   });
 // });
 //
-// function errorHandling(res, item) {
-//   if (item === undefined) {
-//     res.sendStatus(404);
-//   } else {
-//     res.send(item);
-//   }
-// }
-
-app.listen(3000);
