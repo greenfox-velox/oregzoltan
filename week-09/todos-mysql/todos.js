@@ -33,21 +33,22 @@ app.get('/todos', function(req, res) {
 });
 
 app.get('/todos/:id', function(req, res) {
-  con.query('SELECT * FROM todo WHERE id =' +req.params.id, function(err,row){
+  con.query('SELECT * FROM todo WHERE id =' + req.params.id, function(err,row){
     if(err) {
       console.log(err.toString());
       return;
     }
-    errorHandling(res, row[0]);
+    response(res, row[0]);
   });
 });
 
 function createNewTodo(id, text) {
-  return {
-    'completed': false,
+  var newTodo = {
     'id': id,
-    'text': text
-  };
+    'text': text,
+    'completed': false
+  }
+  return newTodo;
 }
 
 app.post('/todos', function(req, res) {
@@ -66,7 +67,7 @@ app.put('/todos/:id', function(req, res) {
       console.log(err.toString());
       return;
     }
-  errorHandling(res, {id: +req.params.id, text: req.body.text, completed: req.body.completed});
+  response(res, {id: +req.params.id, text: req.body.text, completed: req.body.completed});
   });
 });
 
@@ -76,11 +77,11 @@ app.delete('/todos/:id', function(req, res) {
       console.log(err.toString());
       return;
     }
-    errorHandling(res, {id: +req.params.id, text: req.body.text, completed: req.body.completed});
+  response(res, {id: +req.params.id, text: req.body.text, completed: req.body.completed});
   });
 });
 
-function errorHandling(res, item) {
+function response(res, item) {
   if (item === undefined) {
     res.sendStatus(404);
   } else {
@@ -89,3 +90,5 @@ function errorHandling(res, item) {
 }
 
 app.listen(3000);
+
+module.exports = createNewTodo;

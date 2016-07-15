@@ -50,21 +50,32 @@ h1 {
     background-color: #df69e8;
 }
 
-.delButton {
+.yodaButton {
   position: absolute;
-  right: 45px;
   margin-top: 12px;
+  right: 80px;
   width: 30px;
   height: 30px;
   background-size: 100% 100%;
   margin-left: 40px;
-  background-image: url(bin.png);
   border: none;
+  background-image: url(yoda.jpg);
+}
+
+.delButton {
+  position: absolute;
+  margin-top: 12px;
+  right: 45px;
+  width: 30px;
+  height: 30px;
+  background-size: 100% 100%;
+  border: none;
+  background-image: url(bin.png);
 }
 
 .chkButton {
-  margin-top: 12px;
   position: absolute;
+  margin-top: 12px;
   right: 10px;
   width: 30px;
   height: 30px;
